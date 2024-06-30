@@ -2,7 +2,6 @@ const { Client: AttClient } = require('att-client');
 const { attConfig } = require('./Bot_Config');
 const bot = new AttClient(attConfig);
 
-newPlayers.insert(0, "King.Chaos");
 var activePlayers = [];
 var BlackListed = [];
 
@@ -47,10 +46,6 @@ bot.on('connect', async (connection) => {
     if (BlackListed.includes(user.username)) {
       connection.send(`player kick ${user.id}`);
     };
-    
-    if (Position[0] === 0 && Position[1] === 0 && Position[2] === 0) {
-      newPlayers.push(user.id);
-      setTimeout(function() { connection.send(`player message ${user.username} "Welcome to ${connection.server.name}" 5`)}, 10000);
     };
 
   });
@@ -59,10 +54,10 @@ bot.on('connect', async (connection) => {
 connection.subscribe(`SocialTabletPlayerReported`, async(message) => {
   const { ReportedBy, ReportedPlayer, Reason} = message.data;
 
-  if (event.data.ReportedBy.username === King ) {
-    connection.send(`player message ${King} "You are teleporting to ${ReportedPlayer}" 5`);
+  if (event.data.ReportedBy.username === username ) {
+    connection.send(`player message ${username} "You are teleporting to ${ReportedPlayer}" 5`);
     await sleep(5000);
-    connection.send(`player teleport ${King} ${ReportedPlayer.username}`)
+    connection.send(`player teleport ${username} ${ReportedPlayer.username}`)
   };
 
   
