@@ -59,18 +59,6 @@ bot.on('connect', async (connection) => {
 
   });
 
-  //Social Tablet 
-connection.subscribe(`SocialTabletPlayerReported`, async(message) => {
-  const { ReportedBy, ReportedPlayer, Reason} = message.data;
-
-  if (event.data.ReportedBy.username === username ) {
-    connection.send(`player message ${username} "You are teleporting to ${ReportedPlayer}" 5`);
-    await sleep(5000);
-    connection.send(`player teleport ${username} ${ReportedPlayer.username}`)
-  };
-
-  
-});
 
 });
 bot.start();
