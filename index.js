@@ -46,7 +46,16 @@ bot.on('connect', async (connection) => {
     if (BlackListed.includes(user.username)) {
       connection.send(`player kick ${user.id}`);
     };
-    };
+    
+
+  });
+
+  connection.subscribe(`PlayerLeft`, message => {
+    const { user } = message.data;
+
+    activePlayers.splice(activePlayers.indexOf(user.id), 1);
+    console.log(`${user.username} has disconnected from ${connection.server.name}`);
+    console.log(activePlayers.length + ` are online globally`);
 
   });
 
@@ -62,7 +71,6 @@ connection.subscribe(`SocialTabletPlayerReported`, async(message) => {
 
   
 });
-
 
 });
 bot.start();
